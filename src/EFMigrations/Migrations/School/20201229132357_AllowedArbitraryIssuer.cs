@@ -1,14 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace EFMigrations.Migrations.Tenant
+namespace EFMigrations.Migrations.School
 {
-    public partial class StudentFirstName : Migration
+    public partial class AllowedArbitraryIssuer : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<string>(
-                name: "FirstName",
-                table: "Student",
+                name: "AllowedArbitraryIssuer",
+                table: "Clients",
                 type: "nvarchar(max)",
                 nullable: true);
         }
@@ -16,8 +16,8 @@ namespace EFMigrations.Migrations.Tenant
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "FirstName",
-                table: "Student");
+                name: "AllowedArbitraryIssuer",
+                table: "Clients");
         }
     }
 }

@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Duende.IdentityServer.EntityFramework.Options;
 using HostApp.Services;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using SchoolEntityFrameworkCore;
@@ -48,6 +49,11 @@ namespace HostApp
                 dbContextOptionsProvider.Configure(optionsBuilder);
             });
 
+            services.AddSingleton(new ConfigurationStoreOptions());
+            services.AddSingleton(new OperationalStoreOptions
+            {
+                EnableTokenCleanup = true
+            });
             services.AddDatabaseDeveloperPageExceptionFilter();
         }
 

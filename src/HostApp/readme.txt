@@ -1,2 +1,2 @@
-﻿add-migration initial -c SchoolContext -o Migrations/Tenant
+﻿add-migration initial -c SchoolContext -o Migrations/School
  
