@@ -6,10 +6,10 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace EFMigrations.Migrations.School
+namespace EFMigrations.Migrations.Tenant
 {
-    [DbContext(typeof(SchoolContext))]
-    partial class SchoolContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(TenantAwareConfigurationDbContext))]
+    partial class TenantAwareConfigurationDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -896,71 +896,6 @@ namespace EFMigrations.Migrations.School
                     b.HasDiscriminator<string>("Discriminator").HasValue("PersistedGrant");
                 });
 
-            modelBuilder.Entity("Entities.Course", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<string>("CourseId")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<int>("Credits")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CourseId")
-                        .IsUnique();
-
-                    b.ToTable("course");
-                });
-
-            modelBuilder.Entity("Entities.Enrollment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<int>("CourseId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("EnrollmentId")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<int?>("Grade")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StudentId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CourseId");
-
-                    b.HasIndex("EnrollmentId")
-                        .IsUnique();
-
-                    b.HasIndex("StudentId");
-
-                    b.ToTable("enrollment");
-                });
-
             modelBuilder.Entity("Entities.ExternalService", b =>
                 {
                     b.Property<int>("Id")
@@ -988,44 +923,6 @@ namespace EFMigrations.Migrations.School
                         .IsUnique();
 
                     b.ToTable("ExternalService");
-                });
-
-            modelBuilder.Entity("Entities.Student", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("EnrollmentDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("StudentId")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("StudentId")
-                        .IsUnique();
-
-                    b.ToTable("student");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("Student");
                 });
 
             modelBuilder.Entity("Entities.ClientExtra", b =>
@@ -1070,19 +967,6 @@ namespace EFMigrations.Migrations.School
                         .HasColumnType("nvarchar(max)");
 
                     b.HasDiscriminator().HasValue("PersistedGrantExtra");
-                });
-
-            modelBuilder.Entity("Entities.StudentExtra", b =>
-                {
-                    b.HasBaseType("Entities.Student");
-
-                    b.Property<string>("SomeString")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SomeString22")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasDiscriminator().HasValue("StudentExtra");
                 });
 
             modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.ApiResourceClaim", b =>
@@ -1272,25 +1156,6 @@ namespace EFMigrations.Migrations.School
                     b.Navigation("IdentityResource");
                 });
 
-            modelBuilder.Entity("Entities.Enrollment", b =>
-                {
-                    b.HasOne("Entities.Course", "Course")
-                        .WithMany("Enrollments")
-                        .HasForeignKey("CourseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Entities.Student", "Student")
-                        .WithMany("Enrollments")
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Course");
-
-                    b.Navigation("Student");
-                });
-
             modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.ApiResource", b =>
                 {
                     b.Navigation("Properties");
@@ -1335,16 +1200,6 @@ namespace EFMigrations.Migrations.School
                     b.Navigation("Properties");
 
                     b.Navigation("UserClaims");
-                });
-
-            modelBuilder.Entity("Entities.Course", b =>
-                {
-                    b.Navigation("Enrollments");
-                });
-
-            modelBuilder.Entity("Entities.Student", b =>
-                {
-                    b.Navigation("Enrollments");
                 });
 #pragma warning restore 612, 618
         }

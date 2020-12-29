@@ -25,7 +25,7 @@ namespace Entities
         }
         public ITenantAwareSchoolContext GetTenantAwareConfigurationDbContext(string tenantId)
         {
-            var dbContext = new SchoolContext(tenantId, _storeOptions, _operationalStoreOptions,_dbContextOptionsProvider);
+            var dbContext = new TenantAwareConfigurationDbContext(tenantId, _storeOptions, _operationalStoreOptions,_dbContextOptionsProvider);
             return dbContext;
         }
     }

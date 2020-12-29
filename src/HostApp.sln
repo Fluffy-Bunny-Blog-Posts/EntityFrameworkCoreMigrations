@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30717.126
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HostApp", "HostApp\HostApp.csproj", "{73C26DE8-4CE1-4E91-B01A-16F6DD523398}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HostApp", "HostApp\HostApp.csproj", "{73C26DE8-4CE1-4E91-B01A-16F6DD523398}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFMigrations", "EFMigrations\EFMigrations.csproj", "{9927A461-CC5D-4940-AD54-7E7535AACD8A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFMigrations", "EFMigrations\EFMigrations.csproj", "{9927A461-CC5D-4940-AD54-7E7535AACD8A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "Entities\Entities.csproj", "{B6E57E59-4C6C-4A53-99C0-BA847E663B53}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entities", "Entities\Entities.csproj", "{B6E57E59-4C6C-4A53-99C0-BA847E663B53}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolEntityFrameworkCore", "SchoolEntityFrameworkCore\SchoolEntityFrameworkCore.csproj", "{F0D25887-F49D-4F9A-96AB-2C66E9F882AA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SchoolEntityFrameworkCore", "SchoolEntityFrameworkCore\SchoolEntityFrameworkCore.csproj", "{F0D25887-F49D-4F9A-96AB-2C66E9F882AA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MigrateHost", "MigrateHost\MigrateHost.csproj", "{DD9B7A06-4004-47BC-88B7-B149E5289E18}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{F0D25887-F49D-4F9A-96AB-2C66E9F882AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F0D25887-F49D-4F9A-96AB-2C66E9F882AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F0D25887-F49D-4F9A-96AB-2C66E9F882AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD9B7A06-4004-47BC-88B7-B149E5289E18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD9B7A06-4004-47BC-88B7-B149E5289E18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD9B7A06-4004-47BC-88B7-B149E5289E18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD9B7A06-4004-47BC-88B7-B149E5289E18}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

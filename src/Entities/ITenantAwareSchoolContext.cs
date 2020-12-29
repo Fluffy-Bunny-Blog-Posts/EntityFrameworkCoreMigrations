@@ -7,12 +7,8 @@ namespace Entities
 {
     public interface ITenantAwareSchoolContext : IDisposable
     {
-        public DbSet<StudentExtra> Students { get; set; }
-        public DbSet<Enrollment> Enrollments { get; set; }
-        public DbSet<Course> Courses { get; set; }
 
         public DbSet<ExternalService> ExternalServices { get; set; }
-
 
 
         public DbSet<ClientExtra> Clients { get; set; }

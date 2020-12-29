@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace EFMigrations.Migrations.School
+namespace EFMigrations.Migrations.Tenant
 {
     public partial class AllowedArbitraryIssuer : Migration
     {

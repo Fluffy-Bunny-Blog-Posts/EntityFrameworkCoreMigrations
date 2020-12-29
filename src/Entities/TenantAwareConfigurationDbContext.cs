@@ -8,20 +8,20 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Entities
 {
-    public class SchoolContext : DbContext, ITenantAwareSchoolContext
+    public class TenantAwareConfigurationDbContext : DbContext, ITenantAwareSchoolContext
     {
         private string _tenantId;
         private ITenantAwareDbContextOptionsProvider _dbContextOptionsProvider;
         private ConfigurationStoreOptions _storeOptions;
         private OperationalStoreOptions _operationalStoreOptions;
 
-        public SchoolContext(ConfigurationStoreOptions storeOptions, OperationalStoreOptions operationalStoreOptions,DbContextOptions<SchoolContext> options)
+        public TenantAwareConfigurationDbContext(ConfigurationStoreOptions storeOptions, OperationalStoreOptions operationalStoreOptions,DbContextOptions<TenantAwareConfigurationDbContext> options)
             : base(options)
         {
             this._storeOptions = storeOptions ?? throw new ArgumentNullException(nameof(storeOptions));
             this._operationalStoreOptions = operationalStoreOptions ?? throw new ArgumentNullException(nameof(operationalStoreOptions));
         }
-        public SchoolContext(
+        public TenantAwareConfigurationDbContext(
             string tenantId,
             ConfigurationStoreOptions storeOptions,
             OperationalStoreOptions operationalStoreOptions,
@@ -35,9 +35,6 @@ namespace Entities
            
         }
         public DbContext DbContext => this;
-        public DbSet<StudentExtra> Students { get; set; }
-        public DbSet<Enrollment> Enrollments { get; set; }
-        public DbSet<Course> Courses { get; set; }
         public DbSet<ClientExtra> Clients { get; set; }
         public DbSet<ExternalService> ExternalServices { get; set; }
         public DbSet<PersistedGrantExtra> PersistedGrants { get; set; }
@@ -63,7 +60,6 @@ namespace Entities
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
-            modelBuilder.ConfigureStudentContext();
             modelBuilder.ConfigureExternalServicesContext();
             modelBuilder.ConfigureClientContext(_storeOptions);
             modelBuilder.ConfigureResourcesContext(_storeOptions);

@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace EFMigrations.Migrations.School
+namespace EFMigrations.Migrations.Tenant
 {
     public partial class initial : Migration
     {
@@ -113,22 +113,6 @@ namespace EFMigrations.Migrations.School
                 });
 
             migrationBuilder.CreateTable(
-                name: "course",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CourseId = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Credits = table.Column<int>(type: "int", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_course", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "DeviceCodes",
                 columns: table => new
                 {
@@ -223,26 +207,6 @@ namespace EFMigrations.Migrations.School
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_PersistedGrants", x => x.Key);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "student",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    StudentId = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    EnrollmentDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SomeString = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SomeString22 = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_student", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -598,35 +562,6 @@ namespace EFMigrations.Migrations.School
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "enrollment",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    EnrollmentId = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    CourseId = table.Column<int>(type: "int", nullable: false),
-                    StudentId = table.Column<int>(type: "int", nullable: false),
-                    Grade = table.Column<int>(type: "int", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_enrollment", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_enrollment_course_CourseId",
-                        column: x => x.CourseId,
-                        principalTable: "course",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_enrollment_student_StudentId",
-                        column: x => x.StudentId,
-                        principalTable: "student",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_ApiResourceClaims_ApiResourceId",
                 table: "ApiResourceClaims",
@@ -721,12 +656,6 @@ namespace EFMigrations.Migrations.School
                 column: "ClientId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_course_CourseId",
-                table: "course",
-                column: "CourseId",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
                 name: "IX_DeviceCodes_DeviceCode",
                 table: "DeviceCodes",
                 column: "DeviceCode",
@@ -736,22 +665,6 @@ namespace EFMigrations.Migrations.School
                 name: "IX_DeviceCodes_Expiration",
                 table: "DeviceCodes",
                 column: "Expiration");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_enrollment_CourseId",
-                table: "enrollment",
-                column: "CourseId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_enrollment_EnrollmentId",
-                table: "enrollment",
-                column: "EnrollmentId",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_enrollment_StudentId",
-                table: "enrollment",
-                column: "StudentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ExternalService_Name",
@@ -794,12 +707,6 @@ namespace EFMigrations.Migrations.School
                 name: "IX_PersistedGrants_SubjectId_SessionId_Type",
                 table: "PersistedGrants",
                 columns: new[] { "SubjectId", "SessionId", "Type" });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_student_StudentId",
-                table: "student",
-                column: "StudentId",
-                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -853,9 +760,6 @@ namespace EFMigrations.Migrations.School
                 name: "DeviceCodes");
 
             migrationBuilder.DropTable(
-                name: "enrollment");
-
-            migrationBuilder.DropTable(
                 name: "ExternalService");
 
             migrationBuilder.DropTable(
@@ -878,12 +782,6 @@ namespace EFMigrations.Migrations.School
 
             migrationBuilder.DropTable(
                 name: "Clients");
-
-            migrationBuilder.DropTable(
-                name: "course");
-
-            migrationBuilder.DropTable(
-                name: "student");
 
             migrationBuilder.DropTable(
                 name: "IdentityResources");
